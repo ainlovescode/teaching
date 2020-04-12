@@ -94,7 +94,7 @@ class Transaction:
 
     def serialize(self, isSigned = True):
         """
-        Serializes transaction information into JSON
+        # Serializes transaction information into JSON
         """
         tx = {
             "senderKey": self.sender.to_string().hex(),
@@ -162,18 +162,50 @@ class Transaction:
 """
 
 class MerkleTree(...):
-    ...
+    def __init__(self):
+        self.tree = [[]]
+        self.entries = []
 
-    def add(...):
+    def add(self, entries):
         # Add entries to tree
-        ...
+        self.entries = entries
+        print("{} entries have been added.".format(len(entries)))
+        
 
-    def build(...):
+    def build(self):
         # Build tree computing new root
-        ...
+        # given a list from oldest to youngest
+        def merge_hash(left, right):
+            left_hash = hashlib.sha512(left.encode("utf-8")).digest()
+            right_hash = hashlib.sha512(right.encode("utf-8")).digest()
+
+            merged_hash = hashlib.sha512((str(left_hash) + str(right_hash)).encode("utf-8")).digest()
+
+        temp = [merge_hash(self.entries[i], self.entries[i + 1]) for i in range(len(self.entries) // 2)]
+        if len(self.entries) > len(temp) * 2:
+            temp.append(merge_hash(self.entries[-1], ""))
+
+        while len(temp) > 1:
+            num_of_pairs = len(temp) // 2
+
+            extra = temp[-1] if len(temp) % 2 else None
+            temp = [merge_hash(self.entries[i], self.entries[i + 1]) for i in range(num_of_pairs)]
+            if extra:
+                temp.append(merge_hash(extra, ""))
+            
+        
+            
+
+
+
+
+
+
+
 
     def get_proof(...):
         # Get membership proof for entry
+        # min no, of nodes to construct root
         ...
 
      def get_root(...):
