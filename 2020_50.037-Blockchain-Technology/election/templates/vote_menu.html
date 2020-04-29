@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>Cast Your Vote - DecentVote</title>
+  </head>
+
+  <body>
+    <h1>Cast Your Vote - DecentVote</h1>
+   
+    
+    <hr></hr>
+
+    <div id="login-form" style="padding:20px;">
+      <form style="display: inline; float: right;">
+        <input
+          type="text"
+          id="national-id"
+          name="national-id"
+          placeholder="National ID"
+        />
+
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+
+    <br/>
+    <hr></hr>
+
+    <h2>
+        Are you ready to Vote for the Future?
+    </h2>
+
+    <div id="vote-form-div" style="padding:20px;">
+        <div id="voter-details">
+            <div style="float:left;">Voter Name: </div>
+            <div id="voter-name-div">
+                <p>viewwer</p>
+            </div>
+        </div>
+        <form style="display: inline;" id="vote-form">
+            <select name="candidateChoices" method="GET" action="/">
+                {% for candidateName in candidateNames %}
+                <option value= "{{candidateName}}" SELECTED>{{candidateName}}</option>"
+                {% endfor %}
+            </select>
+  
+          <input type="submit" value="Make My Vote" />
+        </form>
+      </div>
+
+    </body>
+  </body>
+</html>
